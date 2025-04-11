@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0f0f0f;
+  --foreground: #f0f0f0;
+  --accent: #ffffff;
+  --font-sans: var(--font-geist-sans, Arial, sans-serif);
+  --font-mono: var(--font-geist-mono, monospace);
+}
+
+body {
+  margin: 0;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: var(--accent);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #000;
+  background-color: #fff;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-mono);
+  text-shadow: none;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+button,
+input[type="submit"],
+a.button {
+  cursor: pointer;
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  padding: 0.6rem 1.2rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+button:hover,
+input[type="submit"]:hover,
+a.button:hover {
+  background-color: #fff;
+  color: #000;
+}
+
