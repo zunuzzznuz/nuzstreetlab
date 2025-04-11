@@ -450,10 +450,10 @@ const ContactForm = () => {
     e.preventDefault();
     
     const whatsappMessage = 
-      `Hey! I'm ${formData.name}. ` +
+      `Hey NUZ! I'm ${formData.name}. ` +
       `You can reach me at ${formData.email}. ` +
-      `Here's what I have in mind,%0A${formData.message}` +
-      `%0A=========================================================%0A Bot generated message and it's ready to send :)%0A=========================================================%0A COPYRIGHT 2023 NUZ STREETLAB`;
+      `Here's what I have in mind,%0A%0A${formData.message}` +
+      `%0A%0A================================%0ABot generated and it's ready to send :)%0A================================`;
   
     window.open(`https://wa.me/+6283173437699?text=${whatsappMessage}`, '_blank');
     
@@ -561,48 +561,65 @@ const Footer = ({ activeSection, sectionRefs }: {
             ))}
           </div>
           
-          <motion.div
-            className="flex gap-4"
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.4 }}
-          >
-            <motion.a
-              href="https://steamcommunity.com/id/zunuzzz"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{ 
-                type: 'spring',
-                stiffness: 300,
-                delay: 0.1
-              }}
-              whileHover={{ y: -5 }}
-              className="p-2"
-            >
-              <img src="/steamlog.png" alt="Social Logo" className="w-8 h-8" />
-            </motion.a>
-          </motion.div>
-          
-          <motion.a
-            href="mailto:nuz.streetlab@gmail.com"
-            className="text-sm hover:text-gray-300"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-          >
-            nuz.streetlab@gmail.com
-          </motion.a>
-          
-          <motion.p 
-            className="text-sm text-gray-400"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 0.3 }}
-          >
-            &copy; 2023 NUZ STREETLAB
-          </motion.p>
+<motion.div
+  className="flex gap-4"
+  initial={{ y: 20, opacity: 0 }}
+  whileInView={{ y: 0, opacity: 1 }}
+  transition={{ duration: 0.4 }}
+>
+  <motion.a
+    href="https://steamcommunity.com/id/zunuzzz"
+    target="_blank"
+    rel="noopener noreferrer"
+    initial={{ scale: 0 }}
+    whileInView={{ scale: 1 }}
+    transition={{ 
+      type: 'spring',
+      stiffness: 300,
+      delay: 0.1
+    }}
+    whileHover={{ y: -5 }}
+    className="p-2"
+  >
+    <img src="/steamlog.png" alt="Social Logo" className="w-8 h-8" />
+  </motion.a>
+
+  <motion.a
+    href="https://www.instagram.com/nuz.streetlab?igsh=aDNyNTF5M3hta2U2"
+    target="_blank"
+    rel="noopener noreferrer"
+    initial={{ scale: 0 }}
+    whileInView={{ scale: 1 }}
+    transition={{ 
+      type: 'spring',
+      stiffness: 300,
+      delay: 0.2
+    }}
+    whileHover={{ y: -5 }}
+    className="p-2"
+  >
+    <img src="/ig.png" alt="IG Logo" className="w-8 h-8" />
+  </motion.a>
+</motion.div>
+
+<motion.a
+  href="mailto:nuz.streetlab@gmail.com"
+  className="text-sm hover:text-gray-300"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ duration: 0.4, delay: 0.3 }}
+>
+  nuz.streetlab@gmail.com
+</motion.a>
+
+<motion.p 
+  className="text-sm text-gray-400"
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  transition={{ duration: 0.4, delay: 0.4 }}
+>
+  &copy; 2023 NUZ STREETLAB
+</motion.p>
         </div>
       </div>
     </motion.footer>
