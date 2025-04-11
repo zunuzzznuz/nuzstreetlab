@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
+import Image from 'next/image';
 
 // Constants
 const GRID_SIZE = 10;
@@ -65,9 +66,9 @@ const techLogos: TechLogo[] = [
 const merchandise: MerchItem[] = [
   { id: 1, name: 'NUZ Stickers', price: '$1.99', image: '/stiker.png' },
   { id: 2, name: 'NUZ T-shirt', price: '$11.99', image: '/tshirt.png' },
-  { id: 3, name: 'NUZ Label Tag', price: '$3.99', image: 'labeltag.png' },
+  { id: 3, name: 'NUZ Label Tag', price: '$3.99', image: '/labeltag.png' },
   { id: 4, name: 'NUZ Pin', price: '$2.99', image: '/pin.png' },
-  { id: 5, name: 'NUZ Pouch', price: '$4.99', image: 'pouch.png' },
+  { id: 5, name: 'NUZ Pouch', price: '$4.99', image: '/pouch.png' },
   { id: 6, name: 'NUZ Lanyard', price: '$6.99', image: '/lanyard.png' },
 ];
 
@@ -122,11 +123,14 @@ const AboutSection = ({ showAbout, setShowAbout }: {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.0 }}
     >
-      <img 
-        src="/LOGO NUZ.png" 
-        alt="Logo NUZ" 
-        className="h-48 w-96 mx-auto"
-      />
+<Image 
+  src="/LOGO NUZ.png" 
+  alt="Logo NUZ" 
+  width={384}  
+  height={192} 
+  className="mx-auto"
+  priority
+/>
     </motion.div>
 
     <AnimatePresence>
@@ -143,12 +147,7 @@ const AboutSection = ({ showAbout, setShowAbout }: {
             damping: 10
           }}
         >
-          <p className="mb-4">
-            is a hybrid collective blending tech, art, and gaming culture into hands-on digital experiments. 
-            Whether you're looking to build smart systems, enhance visuals, or hunting counter strike case, 
-            we've probably done it or at least tried with style...
-            Привет and welcome to the lab !!!
-          </p>
+<p>is a hybrid collective blending tech, art, and gaming culture into hands-on digital experiments. Whether you&apos;re looking to build smart systems, enhance visuals, or hunting counter strike case, we&apos;ve probably done it or at least tried with style...</p>
         </motion.div>
         
       )}
@@ -181,7 +180,13 @@ const ExperienceSection = ({ clientCount }: { clientCount: number }) => (
     >
       <div className="relative aspect-video bg-black/30 rounded-lg border border-white/20 overflow-hidden shadow-lg">
         <a href="https://www.youtube.com/@nuz.v2" target="_blank" rel="noopener noreferrer">
-          <img src="/yt.png" alt="Experience Showcase" className="w-full h-full object-cover" />
+        <Image
+  src="/yt.png"
+  alt="Experience Showcase"
+  width={800}  
+  height={450} 
+  className="w-full h-full object-cover"
+/>
         </a>
         <div className="absolute bottom-0 left-0 right-0 bg-black/70 px-4 py-2 text-sm">
           <p>see video editing product sample</p>
@@ -204,11 +209,14 @@ const MerchSection = () => (
           viewport={{ once: true }}
         >
           <div className="aspect-square max-w-[200px] mx-auto bg-black/50 rounded-lg overflow-hidden border border-white/20">
-            <img
-              src={item.image}
-              alt={item.name}
-              className="w-full h-full object-cover transition-opacity duration-300"
-            />
+          <Image
+  src={item.image}
+  alt={item.name}
+  width={200}  
+  height={200} 
+  className="w-full h-full object-cover transition-opacity duration-300"
+
+/>
           </div>
           <div className="mt-2 text-center">
             <h3 className="text-md font-bold">{item.name}</h3>
@@ -612,7 +620,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [showAbout, setShowAbout] = useState(false);
   const [clientCount, setClientCount] = useState(0);
-  const [countryCount, setCountryCount] = useState(0);
+
   const [blogSectionTransition, setBlogSectionTransition] = useState(false);
   
   const projectInView = useInView(projectRef, { once: true, amount: 0.5 });
@@ -627,7 +635,6 @@ export default function Home() {
     if (projectInView) {
       const interval = setInterval(() => {
         setClientCount((prev) => (prev < 37 ? prev + 1 : prev));
-        setCountryCount((prev) => (prev < 23 ? prev + 1 : prev));
       }, 200);
       return () => clearInterval(interval);
     }
@@ -687,7 +694,7 @@ export default function Home() {
           const isMerch = section.id === 'merch';
           const isContact = section.id === 'contact';
           const isBlog = section.id === 'lonely';
-          const isActive = activeSection === section.id;
+          
           
           return (
             <motion.section
@@ -713,7 +720,7 @@ export default function Home() {
                 backgroundAttachment: 'fixed',
               }}
             >
-              {/* Section transition glow effect - ONLY for blog section */}
+              {/* Section transition glow effect */}
               {isBlog && blogSectionTransition && (
                 <motion.div
                   className="absolute inset-0 z-10 pointer-events-none"
