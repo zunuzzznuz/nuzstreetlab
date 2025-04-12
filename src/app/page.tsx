@@ -156,7 +156,7 @@ const AboutSection = ({ showAbout, setShowAbout }: {
   </>
 )
 
-const ExperienceSection = ({ clientCount }: { clientCount: number }) => (
+const ExperienceSection = () => (
   <>
     <div className="mt-6 text-1l md:text-2xl font-semibold leading-relaxed max-w-2xl text-white mb-10">
       Provided services to 
@@ -706,7 +706,7 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // Section transition glow effect 
+  // Section transition effect 
   useEffect(() => {
     if (activeSection === 'lonely') {
       setBlogSectionTransition(true);
@@ -817,7 +817,7 @@ export default function Home() {
                 <p className="text-xl mb-8 max-w-2xl mx-auto text-white">{section.desc}</p>
                 
                 {isAbout && <AboutSection showAbout={showAbout} setShowAbout={setShowAbout} />}
-                {isProjects && <ExperienceSection clientCount={clientCount} />}
+                {isProjects && <ExperienceSection />}
                 {isSkills && <ServicesSection />}
                 {isMerch && <MerchSection />}
                 {isContact && <ContactForm />}
