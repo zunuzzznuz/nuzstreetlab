@@ -440,7 +440,7 @@ const ServicesSection = () => {
         </motion.div>
       </div>
       
-      <p className="mt-6 text-1l font-semibold">Technology</p>
+      <p className="mt-6 text-1l font-semibold">Using</p>
       <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-2xl mx-auto">
         {techLogos.map((tech) => (
           <motion.div
