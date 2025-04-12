@@ -91,7 +91,7 @@ const Header = ({ isAtTop, scrollToFooter }: { isAtTop: boolean, scrollToFooter:
         style={{ all: 'unset', cursor: 'pointer' }}
         transition={{ type: 'spring', stiffness: 500 }}
       >
-        <span className="animate-pulse text-shadow-glow font-semibold">JOIN PARTNERSHIP TODAY</span>
+        <span className="animate-pulse text-shadow-glow font-semibold">OPEN COLLABORATION</span>
       </motion.button>
     )}
   </motion.header>
@@ -147,7 +147,7 @@ const AboutSection = ({ showAbout, setShowAbout }: {
             damping: 10
           }}
         >
-<p>is a hybrid collective blending tech, art, and gaming culture into hands-on digital experiments. Whether you&apos;re looking to build smart systems, enhance visuals, or hunting counter strike case, we&apos;ve probably done it or at least tried with style...</p>
+<p>A lowkey collective cooking up tech, visuals, and gaming vibes. No rules, just raw experiments. Welcome to the lab, where anything goes. - NUZ</p>
         </motion.div>
         
       )}
@@ -168,9 +168,10 @@ const ExperienceSection = ({ clientCount }: { clientCount: number }) => (
         {clientCount}
       </motion.span>{' '}
       unique clients both inside and outside the Steam Community since{' '}
-      <span className="font-bold">2022</span>.
+      <span className="font-bold">2022. Trust me its not that much.</span>
     </div>
     
+
     <motion.div
       className="w-full max-w-2xl mx-auto mt-6 mb-10"
       initial={{ opacity: 0, y: 20 }}
@@ -178,7 +179,7 @@ const ExperienceSection = ({ clientCount }: { clientCount: number }) => (
       transition={{ delay: 0.5 }}
       viewport={{ once: true }}
     >
-      <div className="relative aspect-video bg-black/30 rounded-lg border border-white/20 overflow-hidden shadow-lg">
+      <div className="relative aspect-video bg-black/30 rounded-lg border border-white/20 overflow-hidden shadow-lg mb-6">
         <a href="https://www.youtube.com/@nuz.v2" target="_blank" rel="noopener noreferrer">
         <Image
   src="/yt.png"
@@ -190,6 +191,37 @@ const ExperienceSection = ({ clientCount }: { clientCount: number }) => (
         </a>
         <div className="absolute bottom-0 left-0 right-0 bg-black/70 px-4 py-2 text-sm">
           <p>see video editing product sample</p>
+        </div>
+      </div>
+
+      <div className="relative aspect-video bg-black/30 rounded-lg border border-white/20 overflow-hidden shadow-lg mb-6">
+        <a href="https://steamcommunity.com/id/zunuzzz" target="_blank" rel="noopener noreferrer">
+        <Image
+  src="/steam.jpg"
+  alt="Experience Showcase"
+  width={800}  
+  height={450} 
+  className="w-full h-full object-cover"
+/>
+        </a>
+        <div className="absolute bottom-0 left-0 right-0 bg-black/70 px-4 py-2 text-sm">
+          <p>request for programming or cs2 case hunt services directly</p>
+        </div>
+      </div>
+
+      
+      <div className="relative aspect-video bg-black/30 rounded-lg border border-white/20 overflow-hidden shadow-lg">
+        <a href="https://open.spotify.com/playlist/6BXXozWeThk6V3tqB51VXy?si=7bf5fa98d0e84610" target="_blank" rel="noopener noreferrer">
+        <Image
+  src="/spotify.png"
+  alt="Experience Showcase"
+  width={800}  
+  height={450} 
+  className="w-full h-full object-cover"
+/>
+        </a>
+        <div className="absolute bottom-0 left-0 right-0 bg-black/70 px-4 py-2 text-sm">
+          <p>also listen to my spotify playlist</p>
         </div>
       </div>
     </motion.div>
@@ -585,7 +617,7 @@ const Footer = ({ activeSection, sectionRefs }: {
   </motion.a>
 
   <motion.a
-    href="https://www.instagram.com/nuz.streetlab?igsh=aDNyNTF5M3hta2U2"
+    href="https://www.instagram.com/nuz.xz?utm_source=qr&igsh=aDNyNTF5M3hta2U2"
     target="_blank"
     rel="noopener noreferrer"
     initial={{ scale: 0 }}
@@ -603,13 +635,13 @@ const Footer = ({ activeSection, sectionRefs }: {
 </motion.div>
 
 <motion.a
-  href="mailto:nuz.streetlab@gmail.com"
+  href="mailto:nuzzunuzzz@gmail.com"
   className="text-sm hover:text-gray-300"
   initial={{ opacity: 0 }}
   whileInView={{ opacity: 1 }}
   transition={{ duration: 0.4, delay: 0.3 }}
 >
-  nuz.streetlab@gmail.com
+nuzzunuzzz@gmail.com
 </motion.a>
 
 <motion.p 
@@ -618,7 +650,7 @@ const Footer = ({ activeSection, sectionRefs }: {
   whileInView={{ opacity: 1 }}
   transition={{ duration: 0.4, delay: 0.4 }}
 >
-  &copy; 2023 NUZ STREETLAB
+"This whole website is self-made. If its cool, thanks. If its weird, yea thats me."
 </motion.p>
         </div>
       </div>
@@ -651,7 +683,7 @@ export default function Home() {
   useEffect(() => {
     if (projectInView) {
       const interval = setInterval(() => {
-        setClientCount((prev) => (prev < 37 ? prev + 1 : prev));
+        setClientCount((prev) => (prev < 137 ? prev + 1 : prev));
       }, 200);
       return () => clearInterval(interval);
     }
