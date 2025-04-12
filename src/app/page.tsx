@@ -670,7 +670,7 @@ export default function Home() {
   const [isAtTop, setIsAtTop] = useState(true);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const [showAbout, setShowAbout] = useState(false);
-  const [clientCount, setClientCount] = useState(0);
+
 
   const [blogSectionTransition, setBlogSectionTransition] = useState(false);
   
@@ -680,18 +680,7 @@ export default function Home() {
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setIsAtTop(latest < 50);
   });
-
-  // Client counter animation
-  useEffect(() => {
-    if (projectInView) {
-      const interval = setInterval(() => {
-        setClientCount((prev) => (prev < 666 ? prev + 1 : prev));
-      }, 5);
-      return () => clearInterval(interval);
-    }
-  }, [projectInView]);
-
-  // Section observer
+ // Section observer
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -706,7 +695,7 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // Section transition effect 
+  // Section transitionnn
   useEffect(() => {
     if (activeSection === 'lonely') {
       setBlogSectionTransition(true);
