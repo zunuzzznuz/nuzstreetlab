@@ -378,7 +378,7 @@ const SnakeGame = () => {
       </div>
       
       <p className="mt-4 text-sm text-white/70 text-center max-w-xs">
-        Use WASD keys or arrow buttons to control
+        use WASD keys or arrow buttons to control
       </p>
     </div>
   );
