@@ -159,16 +159,16 @@ const AboutSection = ({ showAbout, setShowAbout }: {
 const ExperienceSection = ({ clientCount }: { clientCount: number }) => (
   <>
     <div className="mt-6 text-1l md:text-2xl font-semibold leading-relaxed max-w-2xl text-white mb-10">
-      Provided services to {' '}
+      Provided services to 
       <motion.span
         className="font-bold"
         animate={{ scale: [1, 1.1, 1] }}
         transition={{ repeat: Infinity, duration: 1.5 }}
       >
-        {clientCount}
+        
       </motion.span>{' '}
       unique clients both inside and outside the Steam Community since{' '}
-      <span className="font-bold">2022. Trust me its not that much.</span>
+      <span className="font-bold">2022.</span>
     </div>
     
 
