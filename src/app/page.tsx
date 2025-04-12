@@ -652,7 +652,7 @@ nuzzunuzzz@gmail.com
   whileInView={{ opacity: 1 }}
   transition={{ duration: 0.4, delay: 0.4 }}
 >
-&quot;This whole website is self-made. If its cool, thanks. If its weird, yea thats me.&quot;
+&quot;This whole website is @zunuzzz self-made. If its cool, thanks. If its weird, yea thats me.&quot;
 </motion.p>
         </div>
       </div>
