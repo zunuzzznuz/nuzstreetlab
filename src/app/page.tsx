@@ -613,7 +613,7 @@ const Footer = ({ activeSection, sectionRefs }: {
     whileHover={{ y: -5 }}
     className="p-2"
   >
-    <img src="/steamlog.png" alt="Social Logo" className="w-8 h-8" />
+    <Image src="/steamlog.png" alt="Social Logo" className="w-8 h-8" />
   </motion.a>
 
   <motion.a
@@ -630,7 +630,7 @@ const Footer = ({ activeSection, sectionRefs }: {
     whileHover={{ y: -5 }}
     className="p-2"
   >
-    <img src="/ig.png" alt="IG Logo" className="w-8 h-8" />
+    <Image src="/ig.png" alt="IG Logo" className="w-8 h-8" />
   </motion.a>
 </motion.div>
 
@@ -650,7 +650,7 @@ nuzzunuzzz@gmail.com
   whileInView={{ opacity: 1 }}
   transition={{ duration: 0.4, delay: 0.4 }}
 >
-"This whole website is self-made. If its cool, thanks. If its weird, yea thats me."
+&quot;This whole website is self-made. If its cool, thanks. If its weird, yea thats me.&quot;
 </motion.p>
         </div>
       </div>
