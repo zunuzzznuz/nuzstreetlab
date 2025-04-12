@@ -221,7 +221,7 @@ const ExperienceSection = ({ clientCount }: { clientCount: number }) => (
 />
         </a>
         <div className="absolute bottom-0 left-0 right-0 bg-black/70 px-4 py-2 text-sm">
-          <p>also listen to my spotify playlist</p>
+          <p>listen to spotify playlist</p>
         </div>
       </div>
     </motion.div>
@@ -683,8 +683,8 @@ export default function Home() {
   useEffect(() => {
     if (projectInView) {
       const interval = setInterval(() => {
-        setClientCount((prev) => (prev < 137 ? prev + 1 : prev));
-      }, 200);
+        setClientCount((prev) => (prev < 666 ? prev + 1 : prev));
+      }, 5);
       return () => clearInterval(interval);
     }
   }, [projectInView]);
