@@ -674,9 +674,7 @@ export default function Home() {
 
   const [blogSectionTransition, setBlogSectionTransition] = useState(false);
   
-  const projectInView = useInView(projectRef, { once: true, amount: 0.5 });
-
-  // Header show/hide
+  // Header how hide
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setIsAtTop(latest < 50);
   });
