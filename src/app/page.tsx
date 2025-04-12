@@ -103,14 +103,14 @@ const AboutSection = ({ showAbout, setShowAbout }: {
 }) => (
   <>
     <motion.div
-      className="w-full max-w-2xl mx-auto mt-6 mb-10"
+      className="w-full max-w-2xl mx-auto mt-6 mb-1"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.5 }}
       viewport={{ once: true }}
     >
         <div className="mt-4 text-sm text-white/70">
-          <p>*you can click the logo</p>
+          <p>you can click the logo and scroll down</p>
         </div>
     </motion.div>
     <motion.div
@@ -190,7 +190,7 @@ const ExperienceSection = ({ clientCount }: { clientCount: number }) => (
 />
         </a>
         <div className="absolute bottom-0 left-0 right-0 bg-black/70 px-4 py-2 text-sm">
-          <p>see video editing product sample</p>
+          <p>click to see video editing product sample</p>
         </div>
       </div>
 
@@ -205,7 +205,7 @@ const ExperienceSection = ({ clientCount }: { clientCount: number }) => (
 />
         </a>
         <div className="absolute bottom-0 left-0 right-0 bg-black/70 px-4 py-2 text-sm">
-          <p>request for programming or cs2 case hunt services directly</p>
+          <p>click to request for programming or cs2 case hunt services directly</p>
         </div>
       </div>
 
@@ -221,7 +221,7 @@ const ExperienceSection = ({ clientCount }: { clientCount: number }) => (
 />
         </a>
         <div className="absolute bottom-0 left-0 right-0 bg-black/70 px-4 py-2 text-sm">
-          <p>listen to spotify playlist</p>
+          <p>click to listen spotify playlist</p>
         </div>
       </div>
     </motion.div>
@@ -613,7 +613,8 @@ const Footer = ({ activeSection, sectionRefs }: {
     whileHover={{ y: -5 }}
     className="p-2"
   >
-    <Image src="/steamlog.png" alt="Social Logo" className="w-8 h-8" />
+    <Image src="/steamlog.png" alt="Social Logo" width={800}  
+  height={450}  className="w-8 h-8" />
   </motion.a>
 
   <motion.a
@@ -630,7 +631,8 @@ const Footer = ({ activeSection, sectionRefs }: {
     whileHover={{ y: -5 }}
     className="p-2"
   >
-    <Image src="/ig.png" alt="IG Logo" className="w-8 h-8" />
+    <Image src="/ig.png" alt="IG Logo"   width={800}  
+  height={450} className="w-8 h-8" />
   </motion.a>
 </motion.div>
 
