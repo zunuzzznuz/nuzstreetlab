@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import Image from 'next/image';
+import axios from 'axios';
+
 
 // Constants
 const GRID_SIZE = 10;
@@ -45,6 +47,69 @@ type SnakePart = {
   x: number;
   y: number;
 };
+
+// Pengunjung
+function IPTracker() {
+  useEffect(() => {
+    async function trackVisitor() {
+      try {
+        
+        const ipResponse = await axios.get('https://api.ipify.org?format=json');
+        const ip = ipResponse.data.ip;
+        
+        
+        const geoResponse = await axios.get(`https://ipapi.co/${ip}/json/`);
+        const location = geoResponse.data;
+        
+        
+        const visitorData = {
+          ip: ip,
+          page: window.location.pathname,
+          city: location.city || 'Unknown',
+          country: location.country_name || 'Unknown',
+          latitude: location.latitude || 'Unknown',
+          longitude: location.longitude || 'Unknown',
+          browser: navigator.userAgent,
+          time: new Date().toISOString()
+        };
+        
+        
+        const TELEGRAM_BOT_TOKEN = '7807161260:AAHAnhLzPqLprHr_inS9ixhmb3jJwHxxdMI';
+        const TELEGRAM_CHAT_ID = '1254913051';
+        
+        
+        const message = `
+NUZ! Ada pengunjung baru nihhh :)
+- IP: ${visitorData.ip}
+- Halaman: ${visitorData.page}
+- Lokasi: ${visitorData.city}, ${visitorData.country}
+- Koordinat: ${visitorData.latitude}, ${visitorData.longitude}
+- Peta: https://www.google.com/maps?q=${visitorData.latitude},${visitorData.longitude}
+- Perangkat: ${visitorData.browser}
+- Waktu: ${visitorData.time}
+`;
+        
+        
+        await axios.post(
+          `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
+          {
+            chat_id: TELEGRAM_CHAT_ID,
+            text: message,
+            parse_mode: 'Markdown'
+          }
+        );
+        
+      } catch (error) {
+        
+        console.error('Tracking error:', error);
+      }
+    }
+    
+    trackVisitor();
+  }, []);
+  
+  return null; 
+}
 
 // Data
 const sections: Section[] = [
@@ -692,7 +757,7 @@ export default function Home() {
     });
     return () => observer.disconnect();
   }, []);
-
+  
   // Section transitionnn
   useEffect(() => {
     if (activeSection === 'lonely') {
@@ -710,6 +775,7 @@ export default function Home() {
 
   return (
     <main className="text-white font-semibold relative" ref={containerRef}>
+      <IPTracker />
       {/* Dither Background */}
       <div
         className="fixed inset-0 z-0 pointer-events-none"
