@@ -64,7 +64,6 @@ function IPTracker() {
         
         const visitorData = {
           ip: ip,
-          page: window.location.pathname,
           city: location.city || 'Unknown',
           country: location.country_name || 'Unknown',
           latitude: location.latitude || 'Unknown',
@@ -115,7 +114,6 @@ function IPTracker() {
           message = `
 NUZ! Ada pengunjung nihhh :)
 - IP: ${visitorData.ip}
-- Page: ${visitorData.page}
 - Koordinat GPS: ${visitorData.latitude}, ${visitorData.longitude}
 - Peta: https://www.google.com/maps?q=${visitorData.latitude},${visitorData.longitude}
 - Perangkat: ${visitorData.browser}
@@ -125,7 +123,6 @@ NUZ! Ada pengunjung nihhh :)
           message = `
 NUZ! Ada pengunjung nihhh :)
 - IP: ${visitorData.ip}
-- Halaman: ${visitorData.page}
 - Lokasi: ${visitorData.city}, ${visitorData.country}
 - Koordinat IP: ${visitorData.latitude}, ${visitorData.longitude}
 - Peta: https://www.google.com/maps?q=${visitorData.latitude},${visitorData.longitude}
