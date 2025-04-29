@@ -152,9 +152,31 @@ NUZ! Ada yang dateng nihhh...
   return null; 
 }
 
+interface WeatherCondition {
+  text: string
+  icon: string
+  code: number
+}
+
+interface WeatherLocation {
+  name: string
+  country: string
+  localtime: string
+}
+
+interface CurrentWeather {
+  temp_c: number
+  condition: WeatherCondition
+  last_updated: string
+}
+
+interface WeatherData {
+  location: WeatherLocation
+  current: CurrentWeather
+}
 const WeatherNotification = () => {
   const [showWeather, setShowWeather] = useState(false)
-  const [weather, setWeather] = useState<any>(null)
+  const [weather, setWeather] = useState<WeatherData | null>(null)
   const [loading, setLoading] = useState(true)
   const [scrollTriggered, setScrollTriggered] = useState(false)
 
@@ -225,12 +247,7 @@ const WeatherNotification = () => {
           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
           className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-black/80 backdrop-blur-sm px-4 py-3 rounded-lg shadow-lg border border-white/20 text-sm"
         >
-          <div className="flex items-center gap-3">
-            <Image 
-              src={`https:${weather.current.condition.icon}`} 
-              alt={weather.current.condition.text}
-              className="w-8 h-8"
-            />
+          <div className="flex justify-center items-center  gap-3">
             <div>
               <p className="font-medium">
                 {weather.location.name} 
