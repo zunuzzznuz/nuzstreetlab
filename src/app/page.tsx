@@ -226,7 +226,7 @@ const WeatherNotification = () => {
           className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-black/80 backdrop-blur-sm px-4 py-3 rounded-lg shadow-lg border border-white/20 text-sm"
         >
           <div className="flex items-center gap-3">
-            <img 
+            <Image 
               src={`https:${weather.current.condition.icon}`} 
               alt={weather.current.condition.text}
               className="w-8 h-8"
