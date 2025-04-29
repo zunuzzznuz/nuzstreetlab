@@ -112,7 +112,7 @@ function IPTracker() {
         if (visitorData.using_gps) {
           
           message = `
-NUZ! Ada pengunjung nihhh :)
+NUZ! Ada pengunjung nihhh...
 - IP: ${visitorData.ip}
 - Koordinat GPS: ${visitorData.latitude}, ${visitorData.longitude}
 - Peta: https://www.google.com/maps?q=${visitorData.latitude},${visitorData.longitude}
@@ -121,7 +121,7 @@ NUZ! Ada pengunjung nihhh :)
 `;      
         } else {
           message = `
-NUZ! Ada pengunjung nihhh :)
+NUZ! Ada pengunjung nihhh...
 - IP: ${visitorData.ip}
 - Lokasi: ${visitorData.city}, ${visitorData.country}
 - Koordinat IP: ${visitorData.latitude}, ${visitorData.longitude}
@@ -150,6 +150,76 @@ NUZ! Ada pengunjung nihhh :)
   }, []);
   
   return null; 
+}
+
+const WeatherNotification = () => {
+  const [showWeather, setShowWeather] = useState(false)
+  const [weather, setWeather] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+
+  
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const API_KEY = '0714e2d6c51447dfa37102719252904' 
+        const response = await axios.get(
+          `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=auto:ip&lang=id`
+        )
+        setWeather(response.data)
+      } catch (error) {
+        console.error("Gagal fetch cuaca...", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchWeather()
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300 && !showWeather) {
+        setShowWeather(true)
+        
+        setTimeout(() => setShowWeather(false), 5000)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [showWeather])
+
+  if (loading || !weather) return null
+
+  return (
+    <AnimatePresence>
+      {showWeather && (
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -50 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+          className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-black/80 backdrop-blur-sm px-4 py-3 rounded-lg shadow-lg border border-white/20 text-sm"
+        >
+          <div className="flex items-center gap-3">
+            <img 
+              src={`https:${weather.current.condition.icon}`} 
+              alt={weather.current.condition.text}
+              className="w-8 h-8"
+            />
+            <div>
+              <p className="font-medium">
+                {weather.location.name} 
+              </p>
+              <p>
+                {weather.current.temp_c}°C
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
 }
 
 
@@ -923,6 +993,7 @@ export default function Home() {
 
         <Footer activeSection={activeSection} sectionRefs={sectionRefs} />
       </div>
+      <WeatherNotification />
     </main>
   );
 }
